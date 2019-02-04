@@ -8,7 +8,6 @@ module.exports = function (tileLayers, tile, writeData, done) {
   let mlBboxes = [];
   let popBboxes = [];
   const mlLayer = tileLayers.ml.ml;
-  // const popLayer = tileLayers.pop.pop;
   let mlFeatures = {}
   /** 
    * Set the variables here
@@ -20,13 +19,9 @@ module.exports = function (tileLayers, tile, writeData, done) {
     if (mlFeature.properties.p1 >= threshold) {
       const mlId = `m${i}`;
       mlFeatures[mlId] = mlFeature;
-      // mlBboxes.push(objBbox(mlFeature, mlId));
     }
   }
 
-
-  // writeData(mlBboxes.length + '\n')
-  // writeData(JSON.stringify(mlLayer) + '\n');
   writeData(JSON.stringify(turf.featureCollection(_.values(mlFeatures))) + '\n');
 
 
@@ -75,3 +70,5 @@ function objBbox(obj, id) {
   }
   return bbox;
 }
+
+

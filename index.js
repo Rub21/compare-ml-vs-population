@@ -9,16 +9,17 @@ tileReduce({
   zoom: 15,
   map: path.join(__dirname, '/map.js'),
   sources: [
-    // {
-    //   name: 'pop',
-    //   mbtiles: argv._[0],
-    //   raw: false
-    // },
     {
-      name: 'ml',
+      name: 'limit',
       mbtiles: argv._[0],
       raw: false
     },
+    {
+      name: 'ml',
+      mbtiles: argv._[1],
+      raw: false,
+
+    }
   ]
 })
   .on('reduce', function () { })
