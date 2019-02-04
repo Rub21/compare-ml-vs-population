@@ -10,7 +10,7 @@ tileReduce({
   map: path.join(__dirname, '/map.js'),
   sources: [
     {
-      name: 'limit',
+      name: 'pop',
       mbtiles: argv._[0],
       raw: false
     },
