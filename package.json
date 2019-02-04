@@ -1,0 +1,32 @@
+{
+  "name": "compare-ml-vs-population",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "mlp": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rub21/compare-ml-vs-population.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/Rub21/compare-ml-vs-population/issues"
+  },
+  "homepage": "https://github.com/Rub21/compare-ml-vs-population#readme",
+  "dependencies": {
+    "@mapbox/tile-cover": "^3.0.2",
+    "@mapbox/tile-reduce": "^3.3.0",
+    "@turf/turf": "^5.1.6",
+    "minimist": "^1.2.0",
+    "rbush": "^2.0.2",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.11.1"
+  }
+}
