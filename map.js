@@ -4,16 +4,26 @@ const turf = require('@turf/turf');
 const _ = require('underscore');
 var rbush = require('rbush');
 
-module.exports = function (tileLayers, tile, writeData, done) {
+module.exports = function(tileLayers, tile, writeData, done) {
   let mlBboxes = [];
   let popBboxes = [];
   const mlLayer = tileLayers.ml.ml;
   const populationLayer = tileLayers.pop.pop;
-  let mlFeatures = {}
-  /** 
-   * Set the variables here
-    */
-  const threshold = 0.80;
+  let mlFeatures = {};
+  /**
+   * Set the variables for filtering here!
+   */
+  /**
+   * threshold, for filtering the data.
+   */
+  const threshold = 0.8;
+
+  /**
+   * To filter the tiles which has the distance in this case greater than 0.
+   */
+  const distance = 0;
+
+  
   for (let i = 0; i < mlLayer.features.length; i++) {
     const mlFeature = mlLayer.features[i];
     if (mlFeature.properties.p1 >= threshold) {
@@ -23,10 +33,9 @@ module.exports = function (tileLayers, tile, writeData, done) {
     }
   }
 
-  const distance = 0;
   for (let d = 0; d < populationLayer.features.length; d++) {
     const popFeature = populationLayer.features[d];
-    if (popFeature.properties.distance > 0) {
+    if (popFeature.properties.distance > distance) {
       const popId = `p${d}`;
       popBboxes.push(objBbox(popFeature, popId));
     }
@@ -35,10 +44,7 @@ module.exports = function (tileLayers, tile, writeData, done) {
   const bboxes = [].concat(mlBboxes).concat(popBboxes);
   const tree = rbush(bboxes.length);
   tree.load(bboxes);
-
-
-  let results = {}
-
+  let results = {};
   for (let z = 0; z < popBboxes.length; z++) {
     const bbox = popBboxes[z];
     var overlaps = tree.search(bbox);
@@ -66,5 +72,3 @@ function objBbox(obj, id) {
   }
   return bbox;
 }
-
-
