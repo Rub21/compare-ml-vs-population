@@ -17,10 +17,14 @@ tileReduce({
     {
       name: 'ml',
       mbtiles: argv._[1],
-      raw: false,
-
+      raw: false
     }
+    // {
+    //   name: 'schools',
+    //   mbtiles: argv._[2],
+    //   raw: false,
+    // }
   ]
 })
-  .on('reduce', function () { })
-  .on('end', function () { });
+  .on('reduce', function() {})
+  .on('end', function() {});
