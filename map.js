@@ -2,7 +2,7 @@
 
 const turf = require('@turf/turf');
 const _ = require('underscore');
-var rbush = require('rbush');
+const rbush = require('rbush');
 
 module.exports = function(tileLayers, tile, writeData, done) {
   let mlBboxes = [];
@@ -16,14 +16,13 @@ module.exports = function(tileLayers, tile, writeData, done) {
   /**
    * threshold, for filtering the data.
    */
-  const threshold = 0.8;
+  const threshold = global.mapOptions.threshold;
 
   /**
    * To filter the tiles which has the distance in this case greater than 0.
    */
   const distance = 0;
 
-  
   for (let i = 0; i < mlLayer.features.length; i++) {
     const mlFeature = mlLayer.features[i];
     if (mlFeature.properties.p1 >= threshold) {
@@ -47,8 +46,8 @@ module.exports = function(tileLayers, tile, writeData, done) {
   let results = {};
   for (let z = 0; z < popBboxes.length; z++) {
     const bbox = popBboxes[z];
-    var overlaps = tree.search(bbox);
-    for (var k = 0; k < overlaps.length; k++) {
+    const overlaps = tree.search(bbox);
+    for (let k = 0; k < overlaps.length; k++) {
       const overlap = overlaps[k];
       if (bbox.id !== overlap.id && overlap.id.charAt(0) === 'm') {
         results[overlap.id] = mlFeatures[overlap.id];
@@ -67,7 +66,7 @@ function objBbox(obj, id) {
   const bboxExtent = ['minX', 'minY', 'maxX', 'maxY'];
   let bbox = { id };
   const valBbox = turf.bbox(obj);
-  for (var d = 0; d < valBbox.length; d++) {
+  for (let d = 0; d < valBbox.length; d++) {
     bbox[bboxExtent[d]] = valBbox[d];
   }
   return bbox;

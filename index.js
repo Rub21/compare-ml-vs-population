@@ -8,6 +8,10 @@ tileReduce({
   bbox: argv.bbox,
   zoom: 15,
   map: path.join(__dirname, '/map.js'),
+  mapOptions: {
+    threshold: argv.threshold
+  },
+  sourceCover: 'ml',
   sources: [
     {
       name: 'pop',
@@ -19,11 +23,6 @@ tileReduce({
       mbtiles: argv._[1],
       raw: false
     }
-    // {
-    //   name: 'schools',
-    //   mbtiles: argv._[2],
-    //   raw: false,
-    // }
   ]
 })
   .on('reduce', function() {})
